@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     func configureTestButton() {
         //ボタンを丸くする処理．ボタンが正方形の時，一辺を2で割った数値を入れる(ボタンのサイズは70×70であるので35)
-        testButton.layer.cornerRadius = 35
+        testButton.layer.cornerRadius = 60
         //影の色を指定。(UIColorをCGColorに変換している)
         testButton.layer.shadowColor = UIColor.black.cgColor
         //影の縁のぼかしの強さを指定
