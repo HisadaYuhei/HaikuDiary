@@ -8,6 +8,14 @@
 import UIKit
 
 class DiaryCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet var frontLabel: UILabel!
+    @IBOutlet var middleLabel: UILabel!
+    @IBOutlet var lastLabel: UILabel!
+    
+//    var front: String = ""
+//    var middle: String = ""
+//    var last: String = ""
 
     override func awakeFromNib() {
         super.awakeFromNib()

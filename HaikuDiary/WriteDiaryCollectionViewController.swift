@@ -1,6 +1,9 @@
 import UIKit
 
 class WriteDiaryCollectionViewController: UIViewController, UICollectionViewDataSource {
+    
+    @IBOutlet weak var testButton: UIButton!
+    
     @IBOutlet var collectionView: UICollectionView!
     
     var saveData: UserDefaults = UserDefaults.standard
@@ -12,6 +15,8 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureTestButton()
 
         // UserDefaultsにデフォルト値を登録
         saveData.register(defaults: ["fronts": [], "middles": [], "lasts": [], "contents": []])
@@ -36,8 +41,8 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
         collectionView.dataSource = self
 
         // レイアウト設定
-        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
-        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout.list(using: configuration)
+//        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+//        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout.list(using: configuration)
     }
     
     // セクション内のアイテム数を返す
@@ -47,16 +52,39 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
     
     // セルの内容を設定
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiaryCell", for: indexPath) as! DiaryCollectionViewCell
 
         // UIListContentConfigurationでセルのテキストを設定
-        var contentConfiguration = UIListContentConfiguration.cell()
-        contentConfiguration.text = fronts[indexPath.item]
-        contentConfiguration.secondaryText = contents[indexPath.item]
-        
-        // セルにコンテンツを設定
-        cell.contentConfiguration = contentConfiguration
+//        var contentConfiguration = UIListContentConfiguration.cell()
+//        contentConfiguration.text = fronts[indexPath.item]
+//        contentConfiguration.secondaryText = contents[indexPath.item]
+//        
+//        // セルにコンテンツを設定
+//        cell.contentConfiguration = contentConfiguration
+        cell.frontLabel.text = fronts[indexPath.item]
+        cell.middleLabel.text = middles[indexPath.item]
+        cell.lastLabel.text = lasts[indexPath.item]
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            let width = collectionView.frame.width / 3 - 1 // 横幅を3分の1にする。-1は隙間調整用。
+            return CGSize(width: width, height: width) // 正方形にする場合
+        }
+    
+    //func 
+    
+    func configureTestButton() {
+        //ボタンを丸くする処理．ボタンが正方形の時，一辺を2で割った数値を入れる(ボタンのサイズは70×70であるので35)
+        testButton.layer.cornerRadius = 60
+        //影の色を指定。(UIColorをCGColorに変換している)
+        testButton.layer.shadowColor = UIColor.black.cgColor
+        //影の縁のぼかしの強さを指定
+        testButton.layer.shadowRadius = 3
+        //影の位置を指定
+        testButton.layer.shadowOffset = CGSize(width: 1.5, height: 1.5)
+        //影の不透明度(濃さ)を指定
+        testButton.layer.shadowOpacity = 1.0
     }
 }

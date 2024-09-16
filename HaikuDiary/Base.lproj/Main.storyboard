@@ -57,7 +57,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="1zr-C1-W1w"/>
                     <connections>
-                        <outlet property="testButton" destination="IVM-C0-DQn" id="dvz-ht-Tfs"/>
+                        <outlet property="collectionView" destination="BX0-7q-tn8" id="Ej5-a7-GGQ"/>
+                        <outlet property="testButton" destination="IVM-C0-DQn" id="OHU-jg-Kl6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -141,7 +142,6 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="bml-0z-ro9">
                             <connections>
                                 <action selector="save:" destination="GKX-vT-dCL" id="Dvq-M3-sex"/>
-                                <segue destination="hOT-wU-QxI" kind="show" id="cUr-xb-uGY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -150,16 +150,17 @@
                         <outlet property="frontTextField" destination="KCn-EJ-IkQ" id="ppk-dv-tYU"/>
                         <outlet property="lastTextField" destination="Pfw-ev-fDE" id="k14-Zd-mvY"/>
                         <outlet property="middleTextField" destination="E3U-DH-huc" id="7z1-eH-5Vr"/>
+                        <segue destination="hOT-wU-QxI" kind="show" identifier="ReadDiary" id="rOm-ur-38g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="si7-Y4-ECj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2122.9007633587785" y="3.5211267605633805"/>
         </scene>
-        <!--View Controller-->
+        <!--Read Diary View Controller-->
         <scene sceneID="mYQ-Ga-RP0">
             <objects>
-                <viewController id="hOT-wU-QxI" sceneMemberID="viewController">
+                <viewController id="hOT-wU-QxI" customClass="ReadDiaryViewController" customModule="HaikuDiary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yq0-st-KJo">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -170,15 +171,50 @@
                                 <color key="backgroundColor" red="0.74541467428207397" green="0.99728637933731079" blue="0.0056135067716240883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3wQ-aZ-9ZL">
-                                <rect key="frame" x="57" y="226" width="274" height="398"/>
+                                <rect key="frame" x="59" y="227" width="274" height="398"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="今日の一句" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugb-WV-a7a">
+                                <rect key="frame" x="81" y="123" width="231" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8s-RQ-cf4">
+                                <rect key="frame" x="253" y="323" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBn-uq-ZzX">
+                                <rect key="frame" x="175" y="395" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fM6-8A-Xve">
+                                <rect key="frame" x="110" y="475" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kXN-zE-AFG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="uHK-1a-G6m"/>
+                    <navigationItem key="navigationItem" id="uHK-1a-G6m">
+                        <barButtonItem key="rightBarButtonItem" title="TOP" style="plain" id="kan-E3-gmI"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="frontLabel" destination="N8s-RQ-cf4" id="xIM-5d-17G"/>
+                        <outlet property="lastLabel" destination="fM6-8A-Xve" id="XyR-Db-C1h"/>
+                        <outlet property="middleLabel" destination="MBn-uq-ZzX" id="NTg-Vy-r2h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJ6-HI-TO5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

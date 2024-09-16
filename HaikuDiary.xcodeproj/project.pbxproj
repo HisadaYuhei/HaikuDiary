@@ -15,6 +15,9 @@
 		045F19592C9589C200128E7A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 045F19582C9589C200128E7A /* Base */; };
 		045F19612C959CF600128E7A /* WriteDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F19602C959CF600128E7A /* WriteDiaryViewController.swift */; };
 		045F19632C95AB5C00128E7A /* WriteDiaryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F19622C95AB5B00128E7A /* WriteDiaryCollectionViewController.swift */; };
+		045F198A2C97ED3600128E7A /* ReadDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F19892C97ED3600128E7A /* ReadDiaryViewController.swift */; };
+		045F19912C980D6200128E7A /* DiaryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F198F2C980D6200128E7A /* DiaryCollectionViewCell.swift */; };
+		045F19922C980D6200128E7A /* DiaryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045F19902C980D6200128E7A /* DiaryCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		045F195A2C9589C200128E7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		045F19602C959CF600128E7A /* WriteDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDiaryViewController.swift; sourceTree = "<group>"; };
 		045F19622C95AB5B00128E7A /* WriteDiaryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDiaryCollectionViewController.swift; sourceTree = "<group>"; };
+		045F19892C97ED3600128E7A /* ReadDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadDiaryViewController.swift; sourceTree = "<group>"; };
+		045F198F2C980D6200128E7A /* DiaryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionViewCell.swift; sourceTree = "<group>"; };
+		045F19902C980D6200128E7A /* DiaryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiaryCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,10 +71,13 @@
 				045F19502C9589C100128E7A /* ViewController.swift */,
 				045F19602C959CF600128E7A /* WriteDiaryViewController.swift */,
 				045F19622C95AB5B00128E7A /* WriteDiaryCollectionViewController.swift */,
+				045F19892C97ED3600128E7A /* ReadDiaryViewController.swift */,
 				045F19522C9589C100128E7A /* Main.storyboard */,
 				045F19552C9589C200128E7A /* Assets.xcassets */,
 				045F19572C9589C200128E7A /* LaunchScreen.storyboard */,
 				045F195A2C9589C200128E7A /* Info.plist */,
+				045F198F2C980D6200128E7A /* DiaryCollectionViewCell.swift */,
+				045F19902C980D6200128E7A /* DiaryCollectionViewCell.xib */,
 			);
 			path = HaikuDiary;
 			sourceTree = "<group>";
@@ -131,6 +140,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				045F19922C980D6200128E7A /* DiaryCollectionViewCell.xib in Resources */,
 				045F19562C9589C200128E7A /* Assets.xcassets in Resources */,
 				045F19592C9589C200128E7A /* Base in Resources */,
 				045F19542C9589C100128E7A /* Base in Resources */,
@@ -146,9 +156,11 @@
 			files = (
 				045F19612C959CF600128E7A /* WriteDiaryViewController.swift in Sources */,
 				045F19512C9589C100128E7A /* ViewController.swift in Sources */,
+				045F198A2C97ED3600128E7A /* ReadDiaryViewController.swift in Sources */,
 				045F194D2C9589C100128E7A /* AppDelegate.swift in Sources */,
 				045F19632C95AB5C00128E7A /* WriteDiaryCollectionViewController.swift in Sources */,
 				045F194F2C9589C100128E7A /* SceneDelegate.swift in Sources */,
+				045F19912C980D6200128E7A /* DiaryCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

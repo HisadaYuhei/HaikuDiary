@@ -45,17 +45,34 @@ class WriteDiaryViewController: UIViewController, UITextFieldDelegate{
         return true
     }
     
+//    func readFronts()->String{
+//        return fronts
+//    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! ReadDiaryViewController
+        let front  = frontTextField.text
+        let middle = middleTextField.text
+        let last  = lastTextField.text
+        
+        destinationVC.fronts  = front
+        destinationVC.middles = middle
+        destinationVC.lasts   = last
+    }
+    
     @IBAction func save(_ sender: Any) {
         guard let front = frontTextField.text, !front.isEmpty,
               let middle = middleTextField.text, !middle.isEmpty,
-              let last = lastTextField.text, !last.isEmpty,
-              let content = contentTextView.text, !content.isEmpty else {
+              let last = lastTextField.text, !last.isEmpty
+              //let content = contentTextView.text, !content.isEmpty
+        else {
             // タイトルまたは内容が空の場合、エラーメッセージを表示
-            let alert = UIAlertController(title: "エラー", message: "タイトルまたは内容が空です。", preferredStyle: .alert)
+            let alert = UIAlertController(title: "エラー", message: "入力されていません", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
             return
         }
+        let content = contentTextView.text ?? ""
         
         // タイトルと内容を配列に追加
         fronts.append(front)
@@ -70,11 +87,16 @@ class WriteDiaryViewController: UIViewController, UITextFieldDelegate{
         saveData.set(contents, forKey: "contents")
         
         // 保存完了メッセージの表示
-        let alert: UIAlertController = UIAlertController(title: "追加", message: "Todoの追加が完了しました。", preferredStyle: .alert)
+        let alert: UIAlertController = UIAlertController(title: "追加", message: "一句詠みました", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             // 保存後に前の画面に戻る
-            self.navigationController?.popViewController(animated: true)
+            //self.navigationController?.popViewController(animated: true)
+//            let viewController = ReadDiaryViewController() // インスタンスを作成
+//            self.navigationController?.pushViewController(viewController, animated: true)
+            self.performSegue(withIdentifier: "ReadDiary",sender: nil)
+
+
         }))
         present(alert, animated: true, completion: nil)
     }

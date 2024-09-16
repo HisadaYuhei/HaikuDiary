@@ -9,21 +9,21 @@ import UIKit
 
 class ReadDiaryViewController: UIViewController {
 
+    var fronts : String?
+    var middles : String?
+    var lasts: String?
+    
+    @IBOutlet weak var frontLabel: UILabel!
+    @IBOutlet weak var middleLabel: UILabel!
+    @IBOutlet weak var lastLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        frontLabel.text = fronts
+        middleLabel.text = middles
+        lastLabel.text = lasts
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
