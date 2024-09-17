@@ -15,6 +15,12 @@ class WriteDiaryViewController: UIViewController, UITextFieldDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        contentTextView.layer.borderColor = UIColor.lightGray.cgColor
+        contentTextView.layer.borderWidth = 0.5
+        contentTextView.layer.cornerRadius = 5
+        contentTextView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        
         // デフォルトの値を登録
         saveData.register(defaults: ["fronts": [], "middles": [], "lasts": [], "contents": []])
         
