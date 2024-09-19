@@ -30,7 +30,7 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
             middles = savedMiddles
         }
         
-        if let savedLasts = saveData.object(forKey: "Lasts") as? [String] {
+        if let savedLasts = saveData.object(forKey: "lasts") as? [String] {
             lasts = savedLasts
         }
         
@@ -39,6 +39,7 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
         }
 
         collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "DiaryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DiaryCell")
 
         // レイアウト設定
 //        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
@@ -58,8 +59,8 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
 //        var contentConfiguration = UIListContentConfiguration.cell()
 //        contentConfiguration.text = fronts[indexPath.item]
 //        contentConfiguration.secondaryText = contents[indexPath.item]
-//        
-//        // セルにコンテンツを設定
+//
+        
 //        cell.contentConfiguration = contentConfiguration
         cell.frontLabel.text = fronts[indexPath.item]
         cell.middleLabel.text = middles[indexPath.item]

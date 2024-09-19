@@ -33,7 +33,7 @@ class WriteDiaryViewController: UIViewController, UITextFieldDelegate{
             middles = savedMiddles
         }
         
-        if let savedLasts = saveData.object(forKey: "Lasts") as? [String] {
+        if let savedLasts = saveData.object(forKey: "lasts") as? [String] {
             lasts = savedLasts
         }
         
