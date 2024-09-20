@@ -40,6 +40,11 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
 
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "DiaryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DiaryCell")
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: collectionView.frame.width / 2 - 20 , height: 224)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 12)
+        collectionView.collectionViewLayout = layout
 
         // レイアウト設定
 //        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
@@ -59,7 +64,7 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
 //        var contentConfiguration = UIListContentConfiguration.cell()
 //        contentConfiguration.text = fronts[indexPath.item]
 //        contentConfiguration.secondaryText = contents[indexPath.item]
-//
+        
         
 //        cell.contentConfiguration = contentConfiguration
         cell.frontLabel.text = fronts[indexPath.item]
@@ -69,12 +74,12 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            let width = collectionView.frame.width / 3 - 1 // 横幅を3分の1にする。-1は隙間調整用。
-            return CGSize(width: width, height: width) // 正方形にする場合
-        }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//            let width = collectionView.frame.width / 3 - 1 // 横幅を3分の1にする。-1は隙間調整用。
+//            return CGSize(width: width, height: width) // 正方形にする場合
+//        }
     
-    //func 
+    //func
     
     func configureTestButton() {
         //ボタンを丸くする処理．ボタンが正方形の時，一辺を2で割った数値を入れる(ボタンのサイズは70×70であるので35)

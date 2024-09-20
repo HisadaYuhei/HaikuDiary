@@ -16,7 +16,8 @@ class DiaryCollectionViewCell: UICollectionViewCell {
 //    var front: String = ""
 //    var middle: String = ""
 //    var last: String = ""
-
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
