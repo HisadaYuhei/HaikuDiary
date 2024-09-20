@@ -73,11 +73,11 @@
 				045F19622C95AB5B00128E7A /* WriteDiaryCollectionViewController.swift */,
 				045F19892C97ED3600128E7A /* ReadDiaryViewController.swift */,
 				045F19522C9589C100128E7A /* Main.storyboard */,
+				045F198F2C980D6200128E7A /* DiaryCollectionViewCell.swift */,
+				045F19902C980D6200128E7A /* DiaryCollectionViewCell.xib */,
 				045F19552C9589C200128E7A /* Assets.xcassets */,
 				045F19572C9589C200128E7A /* LaunchScreen.storyboard */,
 				045F195A2C9589C200128E7A /* Info.plist */,
-				045F198F2C980D6200128E7A /* DiaryCollectionViewCell.swift */,
-				045F19902C980D6200128E7A /* DiaryCollectionViewCell.xib */,
 			);
 			path = HaikuDiary;
 			sourceTree = "<group>";
