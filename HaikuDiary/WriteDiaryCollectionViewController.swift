@@ -49,7 +49,32 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
         // レイアウト設定
 //        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
 //        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout.list(using: configuration)
+        
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(onLongPressAction))
+            longPressRecognizer.allowableMovement = 10
+            longPressRecognizer.minimumPressDuration = 1
+            collectionView.addGestureRecognizer(longPressRecognizer)
     }
+    
+    @objc func onLongPressAction(sender: UILongPressGestureRecognizer) {
+            let point: CGPoint = sender.location(in: self.collectionView)
+            let indexPath = self.collectionView.indexPathForItem(at: point)
+            if let indexPath = indexPath {
+                switch sender.state {
+                case .began:
+                    print("Long press began at: \(indexPath)")
+                default:
+                    break
+                    
+//                let vc = OrderMenuViewController.instantiate()
+//                            let tableListDic = tables.sorted {
+//                                (s1, s2) -> Bool in
+//                                s1.name.localizedStandardCompare(s2.name) == .orderedAscending
+                }
+//                vc.table = tableListDic[indexPath.row]
+//                            navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     
     // セクション内のアイテム数を返す
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
