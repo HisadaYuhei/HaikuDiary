@@ -136,9 +136,15 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
         
         
 //        cell.contentConfiguration = contentConfiguration
-        cell.frontLabel.text = fronts[indexPath.item]
-        cell.middleLabel.text = middles[indexPath.item]
-        cell.lastLabel.text = lasts[indexPath.item]
+//        cell.frontLabel.text = fronts[indexPath.item]
+//        cell.middleLabel.text = middles[indexPath.item]
+//        cell.lastLabel.text = lasts[indexPath.item]
+        
+        let frontText: String = fronts[indexPath.item]
+        let middleText: String = middles[indexPath.item]
+        let lastText: String = lasts[indexPath.item]
+        
+        cell.setUp(frontText: frontText, middleText: middleText, lastText: lastText)
         
         return cell
     }
