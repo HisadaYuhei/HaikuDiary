@@ -66,7 +66,7 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
                 default:
                     break
                     
-//                let vc = OrderMenuViewController.instantiate()
+//                let vc = WriteDiaryViewController.instantiate()
 //                            let tableListDic = tables.sorted {
 //                                (s1, s2) -> Bool in
 //                                s1.name.localizedStandardCompare(s2.name) == .orderedAscending
@@ -75,6 +75,50 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
 //                            navigationController?.pushViewController(vc, animated: true)
             }
         }
+    
+//    func collectionView(_ collectionView: UICollectionView,
+//                        contextMenuConfigurationForItemAt indexPath: IndexPath,
+//                        point: CGPoint) -> UIContextMenuConfiguration? {
+//        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
+//            let deleteAction = self.deleteAction(indexPath)
+//            return UIMenu(title: "", children: [deleteAction])
+//        }
+//    }
+    
+//    func contextMenuInteraction(_ interaction: UIContextMenuInteraction,
+//                                    configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+//        return UIContextMenuConfiguration(identifier: nil,
+//                                          previewProvider: nil,
+//                                          actionProvider: { suggestedActions in
+//            let saveAction = UIAction(title: NSLocalizedString("Save", comment: ""),
+//                                      image: UIImage(systemName: "arrow.down.square")) { action in
+//                                 self.performSave()
+//                             }
+//                    
+//            let deleteAction = UIAction(title: NSLocalizedString("Delete", comment: ""),
+//                                        image: UIImage(systemName: "trash"),
+//                                        attributes: .destructive) { action in
+//                                   self.performDelete()
+//                               }
+//                                                
+//            return UIMenu(title: "Select Action", children: [saveAction, deleteAction])
+//        })
+//    }
+
+
+    
+//    func performDelete(_ indexPath: IndexPath) -> UIAction {
+//        return UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { action in
+//            // コレクションビューのデータソースからアイテムを削除する処理
+//            self.fronts.remove(at: indexPath.row)
+//            self.middles.remove(at: indexPath.row)
+//            self.lasts.remove(at: indexPath.row)
+//            self.contents.remove(at: indexPath.row)
+//            self.collectionView.deleteItems(at: [indexPath])
+//        }
+//    }
+
+
     
     // セクション内のアイテム数を返す
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

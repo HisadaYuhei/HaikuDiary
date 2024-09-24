@@ -22,6 +22,15 @@ class DiaryCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        // ラベルに縦書きテキストを設定
+        setVerticalText(for: frontLabel, text: "前のテキスト")
+        setVerticalText(for: middleLabel, text: "真ん中のテキスト")
+        setVerticalText(for: lastLabel, text: "最後のテキスト")
+                
+        // contentViewを90度回転させる
+        contentView.transform = CGAffineTransform(rotationAngle: .pi / 2)
+        contentView.frame = bounds
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
 //        frontLabel.text = fronts
 //        middleLabel.text = middles
@@ -57,8 +66,22 @@ class DiaryCollectionViewCell: UICollectionViewCell {
 //        contentView.addSubview(frontLabel)
 //        contentView.addSubview(middleLabel)
 //        contentView.addSubview(lastLabel)
+    }
+    
+    // 縦書きテキストをUILabelに設定するヘルパーメソッド
+    func setVerticalText(for label: UILabel, text: String) {
+        let attributedString = NSMutableAttributedString(string: text)
         
+        // 文字全体に縦書き属性を設定
+        attributedString.addAttribute(.verticalGlyphForm, value: 1, range: NSRange(location: 0, length:attributedString.length))
 
-        
+            label.attributedText = attributedString
+            label.numberOfLines = 0  // 複数行表示（縦書き）の設定
+            label.textAlignment = .center  // 中央揃え（オプション）
+        }
+
+    // ビューポートの調整 (contentOffsetを使わず、boundsに基づく)
+    func viewportBounds(for textViewportLayoutController: NSTextViewportLayoutController) -> CGRect {
+        return bounds.insetBy(dx: 0, dy: -100)
     }
 }
