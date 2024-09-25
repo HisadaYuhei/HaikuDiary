@@ -33,6 +33,10 @@ class DiaryCollectionViewCell: UICollectionViewCell {
         lastLabel.text = last_verticalText
         lastLabel.sizeToFit()
         
+//        frontLabel.frame = CGRect(x: 225, y: 200, width: 100, height: 300)
+//        middleLabel.frame = CGRect(x: 150, y: 300, width: 100, height: 300)
+//        lastLabel.frame = CGRect(x: 75, y: 400, width: 100, height: 300)
+        
         self.addSubview(frontLabel)
         self.addSubview(middleLabel)
         self.addSubview(lastLabel)

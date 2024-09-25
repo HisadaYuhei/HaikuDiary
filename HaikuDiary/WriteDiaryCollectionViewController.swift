@@ -1,6 +1,6 @@
 import UIKit
 
-class WriteDiaryCollectionViewController: UIViewController, UICollectionViewDataSource {
+class WriteDiaryCollectionViewController: UIViewController, UICollectionViewDataSource, UIContextMenuInteractionDelegate {
     
     @IBOutlet weak var testButton: UIButton!
     
@@ -50,31 +50,51 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
 //        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
 //        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout.list(using: configuration)
         
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(onLongPressAction))
-            longPressRecognizer.allowableMovement = 10
-            longPressRecognizer.minimumPressDuration = 1
-            collectionView.addGestureRecognizer(longPressRecognizer)
+//        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(onLongPressAction))
+//            longPressRecognizer.allowableMovement = 10
+//            longPressRecognizer.minimumPressDuration = 1
+//            collectionView.addGestureRecognizer(longPressRecognizer)
+//        // UILongPressGestureRecognizerの追加
+//        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gesture:)))
+//        longPressGesture.minimumPressDuration = 0.5 // 長押しの時間
+//        collectionView.addGestureRecognizer(longPressGesture)
     }
     
-    @objc func onLongPressAction(sender: UILongPressGestureRecognizer) {
-            let point: CGPoint = sender.location(in: self.collectionView)
-            let indexPath = self.collectionView.indexPathForItem(at: point)
-            if let indexPath = indexPath {
-                switch sender.state {
-                case .began:
-                    print("Long press began at: \(indexPath)")
-                default:
-                    break
-                    
-//                let vc = WriteDiaryViewController.instantiate()
-//                            let tableListDic = tables.sorted {
-//                                (s1, s2) -> Bool in
-//                                s1.name.localizedStandardCompare(s2.name) == .orderedAscending
-                }
-//                vc.table = tableListDic[indexPath.row]
-//                            navigationController?.pushViewController(vc, animated: true)
-            }
-        }
+//    // 長押しが検知された際に呼び出されるメソッド
+//    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
+//        if gesture.state == .began {
+//            let point = gesture.location(in: self.collectionView)
+//            if let indexPath = self.collectionView.indexPathForItem(at: point) {
+//                // 長押しされたセルのインデックスを取得して処理を実行
+//                print("長押しされたセル: \(indexPath.row)")
+//                
+//                // 必要なアクションをここに追加 (例: アラート表示や削除処理)
+//                let alertController = UIAlertController(title: "長押し", message: "セルを長押ししました。", preferredStyle: .alert)
+//                alertController.addAction(UIAlertAction(title: "OK", style: .default))
+//                self.present(alertController, animated: true, completion: nil)
+//            }
+//        }
+//    }
+    
+//    @objc func onLongPressAction(sender: UILongPressGestureRecognizer) {
+//            let point: CGPoint = sender.location(in: self.collectionView)
+//            let indexPath = self.collectionView.indexPathForItem(at: point)
+//            if let indexPath = indexPath {
+//                switch sender.state {
+//                case .began:
+//                    print("Long press began at: \(indexPath)")
+//                default:
+//                    break
+//                    
+////                let vc = WriteDiaryViewController.instantiate()
+////                            let tableListDic = tables.sorted {
+////                                (s1, s2) -> Bool in
+////                                s1.name.localizedStandardCompare(s2.name) == .orderedAscending
+//                }
+////                vc.table = tableListDic[indexPath.row]
+////                            navigationController?.pushViewController(vc, animated: true)
+//            }
+//        }
     
 //    func collectionView(_ collectionView: UICollectionView,
 //                        contextMenuConfigurationForItemAt indexPath: IndexPath,
@@ -146,15 +166,64 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
         
         cell.setUp(frontText: frontText, middleText: middleText, lastText: lastText)
         
+        let interaction = UIContextMenuInteraction(delegate: self)
+        cell.addInteraction(interaction)
+        
         return cell
+    }
+    
+    // メニューを表示するための関数
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+            
+        // 押されたセルのインデックスを取得
+        guard let indexPath = collectionView.indexPathForItem(at: location),
+              let cell = collectionView.cellForItem(at: indexPath) else {
+            return nil
+        }
+            
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            // メニューのアクションを定義
+//            let editAction = UIAction(title: "編集", image: UIImage(systemName: "pencil")) { _ in
+//                print("編集が選択されました")
+//                // 編集処理を実行
+//            }
+            
+            let deleteAction = UIAction(title: "削除", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
+                print("削除が選択されました")
+                // 削除処理を実行
+                self.fronts.remove(at: indexPath.row)
+                self.middles.remove(at: indexPath.row)
+                self.lasts.remove(at: indexPath.row)
+                self.contents.remove(at: indexPath.row)
+                
+                // UserDefaultsにデータを保存
+                self.saveData.set(self.fronts, forKey: "fronts")
+                self.saveData.set(self.middles, forKey: "middles")
+                self.saveData.set(self.lasts, forKey: "lasts")
+                self.saveData.set(self.contents, forKey: "contents")
+                
+                self.collectionView.deleteItems(at: [indexPath])
+            }
+            
+//            return UIMenu(title: "", children: [editAction, deleteAction])
+            return UIMenu(title: "", children: [deleteAction])
+        }
+    }
+        
+    // メニュー表示中にハイライトされるプレビューのカスタマイズ
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, previewForHighlightingMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return nil
+    }
+        
+    // メニューが閉じられた時の処理
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willEndFor configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
+        print("メニューが閉じられました")
     }
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //            let width = collectionView.frame.width / 3 - 1 // 横幅を3分の1にする。-1は隙間調整用。
 //            return CGSize(width: width, height: width) // 正方形にする場合
 //        }
-    
-    //func
     
     func configureTestButton() {
         //ボタンを丸くする処理．ボタンが正方形の時，一辺を2で割った数値を入れる(ボタンのサイズは70×70であるので35)
