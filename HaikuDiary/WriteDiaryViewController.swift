@@ -12,6 +12,7 @@ class WriteDiaryViewController: UIViewController, UITextFieldDelegate{
     var middles: [String] = []
     var lasts: [String] = []
     var contents: [String] = []
+    var dates: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,7 @@ class WriteDiaryViewController: UIViewController, UITextFieldDelegate{
         contentTextView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         
         // デフォルトの値を登録
-        saveData.register(defaults: ["fronts": [], "middles": [], "lasts": [], "contents": []])
+        saveData.register(defaults: ["fronts": [], "middles": [], "lasts": [], "contents": [], "dates": []])
         
         // UserDefaultsから保存されたデータを読み込む（安全にキャスト）
         if let savedFronts = saveData.object(forKey: "fronts") as? [String] {
@@ -39,6 +40,10 @@ class WriteDiaryViewController: UIViewController, UITextFieldDelegate{
         
         if let savedContents = saveData.object(forKey: "contents") as? [String] {
             contents = savedContents
+        }
+        
+        if let savedDates = saveData.object(forKey: "dates") as? [String] {
+            dates = savedDates
         }
 
         frontTextField.delegate = self
@@ -68,11 +73,13 @@ class WriteDiaryViewController: UIViewController, UITextFieldDelegate{
     
     @IBAction func save(_ sender: Any) {
         
-//        let date = Date()
-//        let formatter = DateFormatter()
-//        formatter.dateStyle = .medium
-//        formatter.timeStyle = .short
-//        print(formatter.string(from: date))
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ja_JP") // 日本語のロケールを設定
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        let date_all = formatter.string(from: date)
+        print(date_all)
         
         guard let front = frontTextField.text, !front.isEmpty,
               let middle = middleTextField.text, !middle.isEmpty,
@@ -92,12 +99,15 @@ class WriteDiaryViewController: UIViewController, UITextFieldDelegate{
         middles.append(middle)
         lasts.append(last)
         contents.append(content)
+        dates.append(date_all)
+        
         
         // UserDefaultsに保存（配列全体を保存）
         saveData.set(fronts, forKey: "fronts")
         saveData.set(middles, forKey: "middles")
         saveData.set(lasts, forKey: "lasts")
         saveData.set(contents, forKey: "contents")
+        saveData.set(dates, forKey: "dates")
         
         // 保存完了メッセージの表示
         let alert: UIAlertController = UIAlertController(title: "追加", message: "一句詠みました", preferredStyle: .alert)
@@ -107,9 +117,8 @@ class WriteDiaryViewController: UIViewController, UITextFieldDelegate{
             //self.navigationController?.popViewController(animated: true)
 //            let viewController = ReadDiaryViewController() // インスタンスを作成
 //            self.navigationController?.pushViewController(viewController, animated: true)
+            
             self.performSegue(withIdentifier: "ReadDiary",sender: nil)
-
-
         }))
         present(alert, animated: true, completion: nil)
     }

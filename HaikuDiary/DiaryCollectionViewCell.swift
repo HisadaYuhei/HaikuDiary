@@ -13,11 +13,15 @@ class DiaryCollectionViewCell: UICollectionViewCell {
     @IBOutlet var middleLabel: UILabel!
     @IBOutlet var lastLabel: UILabel!
     
+    @IBOutlet var dateLabel: UILabel!
+    
     var fronts : String?
     var middles : String?
     var lasts: String?
     
-    func setUp(frontText: String, middleText: String, lastText: String){
+    var dates: String?
+    
+    func setUp(frontText: String, middleText: String, lastText: String, dateText: String){
         let front_verticalText = frontText.map { String($0) }.joined(separator: "\n")
         let middle_verticalText = middleText.map { String($0) }.joined(separator: "\n")
         let last_verticalText = lastText.map { String($0) }.joined(separator: "\n")
@@ -37,6 +41,8 @@ class DiaryCollectionViewCell: UICollectionViewCell {
         lastLabel.text = last_verticalText
         lastLabel.sizeToFit()
         
+        dateLabel.text = dateText
+        
 //        frontLabel.frame = CGRect(x: 225, y: 200, width: 100, height: 300)
 //        middleLabel.frame = CGRect(x: 150, y: 300, width: 100, height: 300)
 //        lastLabel.frame = CGRect(x: 75, y: 400, width: 100, height: 300)
@@ -44,6 +50,7 @@ class DiaryCollectionViewCell: UICollectionViewCell {
         self.addSubview(frontLabel)
         self.addSubview(middleLabel)
         self.addSubview(lastLabel)
+        self.addSubview(dateLabel)
     }
     
     override func awakeFromNib() {

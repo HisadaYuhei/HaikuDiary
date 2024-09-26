@@ -12,6 +12,8 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
     var middles: [String] = []
     var lasts: [String] = []
     var contents: [String] = []
+    
+    var dates: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +21,7 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
         configureTestButton()
 
         // UserDefaultsにデフォルト値を登録
-        saveData.register(defaults: ["fronts": [], "middles": [], "lasts": [], "contents": []])
+        saveData.register(defaults: ["fronts": [], "middles": [], "lasts": [], "contents": [], "dates": []])
 
         // UserDefaultsからデータを安全に取得
         if let savedFronts = saveData.object(forKey: "fronts") as? [String] {
@@ -36,6 +38,10 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
         
         if let savedContents = saveData.object(forKey: "contents") as? [String] {
             contents = savedContents
+        }
+        
+        if let savedDates = saveData.object(forKey: "dates") as? [String] {
+            dates = savedDates
         }
 
         collectionView.dataSource = self
@@ -60,7 +66,9 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
         let middleText: String = middles[indexPath.item]
         let lastText: String = lasts[indexPath.item]
         
-        cell.setUp(frontText: frontText, middleText: middleText, lastText: lastText)
+        let dateText: String = dates[indexPath.item]
+        
+        cell.setUp(frontText: frontText, middleText: middleText, lastText: lastText, dateText: dateText)
         
         let interaction = UIContextMenuInteraction(delegate: self)
         cell.addInteraction(interaction)
@@ -91,12 +99,14 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
                 self.middles.remove(at: indexPath.row)
                 self.lasts.remove(at: indexPath.row)
                 self.contents.remove(at: indexPath.row)
+                self.dates.remove(at: indexPath.row)
                 
                 // UserDefaultsにデータを保存
                 self.saveData.set(self.fronts, forKey: "fronts")
                 self.saveData.set(self.middles, forKey: "middles")
                 self.saveData.set(self.lasts, forKey: "lasts")
                 self.saveData.set(self.contents, forKey: "contents")
+                self.saveData.set(self.dates, forKey: "dates")
                 
                 self.collectionView.deleteItems(at: [indexPath])
             }
