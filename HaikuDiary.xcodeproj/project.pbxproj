@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04413A5C2CA5320800ECD1BB /* ReadPastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04413A5B2CA5320800ECD1BB /* ReadPastViewController.swift */; };
 		045F194D2C9589C100128E7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F194C2C9589C100128E7A /* AppDelegate.swift */; };
 		045F194F2C9589C100128E7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F194E2C9589C100128E7A /* SceneDelegate.swift */; };
 		045F19512C9589C100128E7A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F19502C9589C100128E7A /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04413A5B2CA5320800ECD1BB /* ReadPastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadPastViewController.swift; sourceTree = "<group>"; };
 		045F19492C9589C100128E7A /* HaikuDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaikuDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045F194C2C9589C100128E7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		045F194E2C9589C100128E7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				045F19522C9589C100128E7A /* Main.storyboard */,
 				045F198F2C980D6200128E7A /* DiaryCollectionViewCell.swift */,
 				045F19902C980D6200128E7A /* DiaryCollectionViewCell.xib */,
+				04413A5B2CA5320800ECD1BB /* ReadPastViewController.swift */,
 				045F19552C9589C200128E7A /* Assets.xcassets */,
 				045F19572C9589C200128E7A /* LaunchScreen.storyboard */,
 				045F195A2C9589C200128E7A /* Info.plist */,
@@ -156,6 +159,7 @@
 			files = (
 				045F19612C959CF600128E7A /* WriteDiaryViewController.swift in Sources */,
 				045F19512C9589C100128E7A /* ViewController.swift in Sources */,
+				04413A5C2CA5320800ECD1BB /* ReadPastViewController.swift in Sources */,
 				045F198A2C97ED3600128E7A /* ReadDiaryViewController.swift in Sources */,
 				045F194D2C9589C100128E7A /* AppDelegate.swift in Sources */,
 				045F19632C95AB5C00128E7A /* WriteDiaryCollectionViewController.swift in Sources */,

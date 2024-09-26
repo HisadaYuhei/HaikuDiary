@@ -76,6 +76,38 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
         return cell
     }
     
+//    // Cell が選択された場合
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        
+//        // セルを取得するが、この場合再利用せず、実際に選択されたセルを取得したいなら dequeue ではなく cellForItem を使う
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? DiaryCollectionViewCell else {
+//            return
+//        }
+//        
+//        // fronts, middles, lasts, dates からデータを取得
+//        let frontText: String = fronts[indexPath.item]
+//        let middleText: String = middles[indexPath.item]
+//        let lastText: String = lasts[indexPath.item]
+//        let dateText: String = dates[indexPath.item]
+//        
+//        // frontText が空でないことをチェック
+//        if !frontText.isEmpty, !middleText.isEmpty, !lastText.isEmpty, !dateText.isEmpty {
+//            // SubViewController へ遷移するために Segue を呼び出す
+//            performSegue(withIdentifier: "toReadPastViewController", sender: nil)
+//        }
+//    }
+//
+//    
+//    // Segue 準備
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+//        if segue.identifier == "toReadPastViewController" {
+//                // SubViewController へのキャストが正しく行われているか確認
+//            if segue.destination is ReadPastViewController {
+//                    // 必要に応じて、destinationVCにデータを渡す
+//                }
+//        }
+//    }
+    
     // メニューを表示するための関数
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
             
