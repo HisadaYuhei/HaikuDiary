@@ -67,6 +67,13 @@ class WriteDiaryViewController: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func save(_ sender: Any) {
+        
+//        let date = Date()
+//        let formatter = DateFormatter()
+//        formatter.dateStyle = .medium
+//        formatter.timeStyle = .short
+//        print(formatter.string(from: date))
+        
         guard let front = frontTextField.text, !front.isEmpty,
               let middle = middleTextField.text, !middle.isEmpty,
               let last = lastTextField.text, !last.isEmpty

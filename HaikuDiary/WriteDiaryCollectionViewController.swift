@@ -45,100 +45,7 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
         layout.itemSize = CGSize(width: collectionView.frame.width / 2 - 20 , height: 224)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 12)
         collectionView.collectionViewLayout = layout
-
-        // レイアウト設定
-//        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
-//        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout.list(using: configuration)
-        
-//        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(onLongPressAction))
-//            longPressRecognizer.allowableMovement = 10
-//            longPressRecognizer.minimumPressDuration = 1
-//            collectionView.addGestureRecognizer(longPressRecognizer)
-//        // UILongPressGestureRecognizerの追加
-//        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gesture:)))
-//        longPressGesture.minimumPressDuration = 0.5 // 長押しの時間
-//        collectionView.addGestureRecognizer(longPressGesture)
     }
-    
-//    // 長押しが検知された際に呼び出されるメソッド
-//    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
-//        if gesture.state == .began {
-//            let point = gesture.location(in: self.collectionView)
-//            if let indexPath = self.collectionView.indexPathForItem(at: point) {
-//                // 長押しされたセルのインデックスを取得して処理を実行
-//                print("長押しされたセル: \(indexPath.row)")
-//                
-//                // 必要なアクションをここに追加 (例: アラート表示や削除処理)
-//                let alertController = UIAlertController(title: "長押し", message: "セルを長押ししました。", preferredStyle: .alert)
-//                alertController.addAction(UIAlertAction(title: "OK", style: .default))
-//                self.present(alertController, animated: true, completion: nil)
-//            }
-//        }
-//    }
-    
-//    @objc func onLongPressAction(sender: UILongPressGestureRecognizer) {
-//            let point: CGPoint = sender.location(in: self.collectionView)
-//            let indexPath = self.collectionView.indexPathForItem(at: point)
-//            if let indexPath = indexPath {
-//                switch sender.state {
-//                case .began:
-//                    print("Long press began at: \(indexPath)")
-//                default:
-//                    break
-//                    
-////                let vc = WriteDiaryViewController.instantiate()
-////                            let tableListDic = tables.sorted {
-////                                (s1, s2) -> Bool in
-////                                s1.name.localizedStandardCompare(s2.name) == .orderedAscending
-//                }
-////                vc.table = tableListDic[indexPath.row]
-////                            navigationController?.pushViewController(vc, animated: true)
-//            }
-//        }
-    
-//    func collectionView(_ collectionView: UICollectionView,
-//                        contextMenuConfigurationForItemAt indexPath: IndexPath,
-//                        point: CGPoint) -> UIContextMenuConfiguration? {
-//        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
-//            let deleteAction = self.deleteAction(indexPath)
-//            return UIMenu(title: "", children: [deleteAction])
-//        }
-//    }
-    
-//    func contextMenuInteraction(_ interaction: UIContextMenuInteraction,
-//                                    configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-//        return UIContextMenuConfiguration(identifier: nil,
-//                                          previewProvider: nil,
-//                                          actionProvider: { suggestedActions in
-//            let saveAction = UIAction(title: NSLocalizedString("Save", comment: ""),
-//                                      image: UIImage(systemName: "arrow.down.square")) { action in
-//                                 self.performSave()
-//                             }
-//                    
-//            let deleteAction = UIAction(title: NSLocalizedString("Delete", comment: ""),
-//                                        image: UIImage(systemName: "trash"),
-//                                        attributes: .destructive) { action in
-//                                   self.performDelete()
-//                               }
-//                                                
-//            return UIMenu(title: "Select Action", children: [saveAction, deleteAction])
-//        })
-//    }
-
-
-    
-//    func performDelete(_ indexPath: IndexPath) -> UIAction {
-//        return UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { action in
-//            // コレクションビューのデータソースからアイテムを削除する処理
-//            self.fronts.remove(at: indexPath.row)
-//            self.middles.remove(at: indexPath.row)
-//            self.lasts.remove(at: indexPath.row)
-//            self.contents.remove(at: indexPath.row)
-//            self.collectionView.deleteItems(at: [indexPath])
-//        }
-//    }
-
-
     
     // セクション内のアイテム数を返す
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -148,17 +55,6 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
     // セルの内容を設定
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiaryCell", for: indexPath) as! DiaryCollectionViewCell
-
-        // UIListContentConfigurationでセルのテキストを設定
-//        var contentConfiguration = UIListContentConfiguration.cell()
-//        contentConfiguration.text = fronts[indexPath.item]
-//        contentConfiguration.secondaryText = contents[indexPath.item]
-        
-        
-//        cell.contentConfiguration = contentConfiguration
-//        cell.frontLabel.text = fronts[indexPath.item]
-//        cell.middleLabel.text = middles[indexPath.item]
-//        cell.lastLabel.text = lasts[indexPath.item]
         
         let frontText: String = fronts[indexPath.item]
         let middleText: String = middles[indexPath.item]
@@ -219,11 +115,6 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willEndFor configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
         print("メニューが閉じられました")
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//            let width = collectionView.frame.width / 3 - 1 // 横幅を3分の1にする。-1は隙間調整用。
-//            return CGSize(width: width, height: width) // 正方形にする場合
-//        }
     
     func configureTestButton() {
         //ボタンを丸くする処理．ボタンが正方形の時，一辺を2で割った数値を入れる(ボタンのサイズは70×70であるので35)
