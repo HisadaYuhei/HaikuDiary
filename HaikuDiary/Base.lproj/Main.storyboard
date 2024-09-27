@@ -35,6 +35,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <segue destination="RA3-jv-rFD" kind="show" identifier="toReadPastViewController" id="D3M-tf-ymN"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>

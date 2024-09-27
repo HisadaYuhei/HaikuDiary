@@ -1,6 +1,6 @@
 import UIKit
 
-class WriteDiaryCollectionViewController: UIViewController, UICollectionViewDataSource, UIContextMenuInteractionDelegate {
+class WriteDiaryCollectionViewController: UIViewController, UICollectionViewDataSource,UICollectionViewDelegate {
     
     @IBOutlet weak var testButton: UIButton!
     
@@ -43,7 +43,8 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
         if let savedDates = saveData.object(forKey: "dates") as? [String] {
             dates = savedDates
         }
-
+        
+        collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "DiaryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DiaryCell")
         
@@ -70,8 +71,8 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
         
         cell.setUp(frontText: frontText, middleText: middleText, lastText: lastText, dateText: dateText)
         
-        let interaction = UIContextMenuInteraction(delegate: self)
-        cell.addInteraction(interaction)
+//        let interaction = UIContextMenuInteraction(delegate: self)
+//        cell.addInteraction(interaction)
         
         return cell
     }
@@ -108,22 +109,42 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
 //        }
 //    }
     
-    // メニューを表示するための関数
-    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-            
-        // 押されたセルのインデックスを取得
-        guard let indexPath = collectionView.indexPathForItem(at: location),
-              let cell = collectionView.cellForItem(at: indexPath) else {
-            return nil
-        }
-            
-        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
-            // メニューのアクションを定義
-//            let editAction = UIAction(title: "編集", image: UIImage(systemName: "pencil")) { _ in
-//                print("編集が選択されました")
-//                // 編集処理を実行
+//    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
+//        return UIContextMenuConfiguration(actionProvider: { suggestedActions in
+//            if indexPaths.count == 0 {
+//                // Construct an empty-space menu.
+//                return UIMenu(children: [
+//                    UIAction(title: "New Folder") { _ in /* Implement the action. */ }
+//                ])
 //            }
-            
+//            else if indexPaths.count == 1 {
+//                // Construct a single-item menu.
+//                return UIMenu(children: [
+//                    UIAction(title: "Copy") { _ in /* Implement the action. */ },
+//                    UIAction(title: "Delete", attributes: .destructive) { _ in /* Implement the action. */ }
+//                ])
+//            }
+//            else {
+//                // Construct a multiple-item menu.
+//                return UIMenu(children: [
+//                    UIAction(title: "New Folder With Selection") { _ in /* Implement the action. */ }
+//                ])
+//            }
+//        })
+//    }
+    
+    // セルが選択された時の処理
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("セルが選択されました: \(indexPath.row)")
+        guard let cell = collectionView.cellForItem(at: indexPath) else {
+            return
+        }
+        print("Selected indexPath: \(indexPath)")
+    }
+
+    // コンテキストメニューの設定
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             let deleteAction = UIAction(title: "削除", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
                 print("削除が選択されました")
                 // 削除処理を実行
@@ -143,20 +164,64 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
                 self.collectionView.deleteItems(at: [indexPath])
             }
             
-//            return UIMenu(title: "", children: [editAction, deleteAction])
             return UIMenu(title: "", children: [deleteAction])
         }
     }
+
+    
+//    // メニューを表示するための関数
+//    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+//            
+//        // 押されたセルのインデックスを取得
+//        guard let indexPath = collectionView.indexPathForItem(at: location),
+//              let cell = collectionView.cellForItem(at: indexPath) else {
+//            return nil
+//        }
+//        
+//        //print("Location in collectionView: \(WriteDiaryCollectionViewController())")
+//        print("Selected indexPath: \(indexPath)")
+//
+//            
+//        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+//            // メニューのアクションを定義
+////            let editAction = UIAction(title: "編集", image: UIImage(systemName: "pencil")) { _ in
+////                print("編集が選択されました")
+////                // 編集処理を実行
+////            }
+//            
+//            let deleteAction = UIAction(title: "削除", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
+//                print("削除が選択されました")
+//                // 削除処理を実行
+//                self.fronts.remove(at: indexPath.row)
+//                self.middles.remove(at: indexPath.row)
+//                self.lasts.remove(at: indexPath.row)
+//                self.contents.remove(at: indexPath.row)
+//                self.dates.remove(at: indexPath.row)
+//                
+//                // UserDefaultsにデータを保存
+//                self.saveData.set(self.fronts, forKey: "fronts")
+//                self.saveData.set(self.middles, forKey: "middles")
+//                self.saveData.set(self.lasts, forKey: "lasts")
+//                self.saveData.set(self.contents, forKey: "contents")
+//                self.saveData.set(self.dates, forKey: "dates")
+//                
+//                self.collectionView.deleteItems(at: [indexPath])
+//            }
+//            
+////            return UIMenu(title: "", children: [editAction, deleteAction])
+//            return UIMenu(title: "", children: [deleteAction])
+//        }
+//    }
         
-    // メニュー表示中にハイライトされるプレビューのカスタマイズ
-    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, previewForHighlightingMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-        return nil
-    }
-        
-    // メニューが閉じられた時の処理
-    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willEndFor configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
-        print("メニューが閉じられました")
-    }
+//    // メニュー表示中にハイライトされるプレビューのカスタマイズ
+//    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, previewForHighlightingMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+//        return nil
+//    }
+//        
+//    // メニューが閉じられた時の処理
+//    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willEndFor configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
+//        print("メニューが閉じられました")
+//    }
     
     func configureTestButton() {
         //ボタンを丸くする処理．ボタンが正方形の時，一辺を2で割った数値を入れる(ボタンのサイズは70×70であるので35)
