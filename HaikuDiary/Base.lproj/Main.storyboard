@@ -265,7 +265,20 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="uHK-1a-G6m">
-                        <barButtonItem key="rightBarButtonItem" title="TOP" style="plain" id="kan-E3-gmI"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="uLV-2o-7iK">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="gf9-g6-t5W">
+                                <rect key="frame" x="290" y="4.6666666666666679" width="87" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="TOP"/>
+                                <connections>
+                                    <segue destination="Pa4-3d-qRo" kind="unwind" unwindAction="topsegueWithSegue:" id="yM6-9g-caV"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="toTop:" destination="hOT-wU-QxI" id="o4U-ve-Prl"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="frontLabel" destination="N8s-RQ-cf4" id="xIM-5d-17G"/>
@@ -274,6 +287,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJ6-HI-TO5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Pa4-3d-qRo" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3168.7022900763359" y="3.5211267605633805"/>
         </scene>

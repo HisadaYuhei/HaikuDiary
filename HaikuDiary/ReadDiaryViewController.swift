@@ -55,6 +55,9 @@ class ReadDiaryViewController: UIViewController {
         view.addSubview(middleLabel)
         view.addSubview(lastLabel)
     }
-
-
+    
+    @IBAction func toTop(_ sender: Any) {
+        print("topへ")
+        self.navigationController?.popToRootViewController(animated: true)
+    }
 }

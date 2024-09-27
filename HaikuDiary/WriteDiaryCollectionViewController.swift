@@ -2,6 +2,9 @@ import UIKit
 
 class WriteDiaryCollectionViewController: UIViewController, UICollectionViewDataSource,UICollectionViewDelegate {
     
+    @IBAction func topsegue(segue: UIStoryboardSegue) {
+       }
+    
     @IBOutlet weak var testButton: UIButton!
     
     @IBOutlet var collectionView: UICollectionView!
@@ -109,30 +112,6 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
 //        }
 //    }
     
-//    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
-//        return UIContextMenuConfiguration(actionProvider: { suggestedActions in
-//            if indexPaths.count == 0 {
-//                // Construct an empty-space menu.
-//                return UIMenu(children: [
-//                    UIAction(title: "New Folder") { _ in /* Implement the action. */ }
-//                ])
-//            }
-//            else if indexPaths.count == 1 {
-//                // Construct a single-item menu.
-//                return UIMenu(children: [
-//                    UIAction(title: "Copy") { _ in /* Implement the action. */ },
-//                    UIAction(title: "Delete", attributes: .destructive) { _ in /* Implement the action. */ }
-//                ])
-//            }
-//            else {
-//                // Construct a multiple-item menu.
-//                return UIMenu(children: [
-//                    UIAction(title: "New Folder With Selection") { _ in /* Implement the action. */ }
-//                ])
-//            }
-//        })
-//    }
-    
     // セルが選択された時の処理
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("セルが選択されました: \(indexPath.row)")
@@ -222,6 +201,40 @@ class WriteDiaryCollectionViewController: UIViewController, UICollectionViewData
 //    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willEndFor configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
 //        print("メニューが閉じられました")
 //    }
+    
+//    // Pull to Refresh時は refreshControl != nil
+//    private func load(initial: Bool, refreshControl: UIRefreshControl? = nil) {
+//        // 差分更新でないリロードの場合、initial = true
+//        if initial {
+//            // 既に設定されているViewModelの状態をリセットする
+//            viewModel.reset()
+//            // dataSourceに応じてセルを作成する
+//            viewModel.buildCollectionViewData()
+//            // collectionViewを更新
+//            collectionView.reloadData()
+//        }
+//
+//        // fetchDataでAPI通信を行う
+//        viewModel.fetchData(completion: { [weak self] result in
+//            guard let self = self else { return }
+//
+//            refreshControl?.endRefreshing()
+//
+//            switch result {
+//            case .success(let result):
+//                self.viewModel.buildCollectionViewData()
+//                collectionView.reloadData()
+//            case .failure(let error):
+//                // 失敗時はdataSourceにエラーメッセージを入れ更新する
+//                self.collectionViewDataManager.sections = [
+//                    CollectionViewDataManager.buildMessageSection(message: error.localizedDescription)
+//                ]
+//                self.viewModel.buildCollectionViewData()
+//                collectionView.reloadData()
+//            }
+//        })
+//    }
+
     
     func configureTestButton() {
         //ボタンを丸くする処理．ボタンが正方形の時，一辺を2で割った数値を入れる(ボタンのサイズは70×70であるので35)
